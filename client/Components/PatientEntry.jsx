@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {Td} from './Styles/PatientsStyles.jsx';
 function PatientEntry({ patient, index }) {
   return (
     <tr>

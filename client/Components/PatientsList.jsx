@@ -1,9 +1,11 @@
 import React from 'React';
 import PatientEntry from './PatientEntry.jsx';
 
+import { NavRight, Th } from './Styles/PatientsStyles.jsx';
+
 function PatientsList({ physicians }) {
   return (
-    <div>
+    <NavRight>
       {
         physicians.map((physician) => {
           if (physician.clicked) {
@@ -14,10 +16,10 @@ function PatientsList({ physicians }) {
                 <table>
                   <tbody>
                     <tr>
-                      <th>#</th>
-                      <th>Name</th>
-                      <th>Time</th>
-                      <th>Kind</th>
+                      <th style={{width:'100px', textAlign: 'left'}}>#</th>
+                      <Th>Name</Th>
+                      <Th>Time</Th>
+                      <Th>Kind</Th>
                     </tr>
                     {physician.patients.map((patient, index) => <PatientEntry patient={patient} index={index}/>)}
                   </tbody>
@@ -27,7 +29,7 @@ function PatientsList({ physicians }) {
           }
         })
       }
-    </div>
+    </NavRight>
   )
 }
 

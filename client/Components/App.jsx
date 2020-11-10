@@ -4,6 +4,8 @@ import PhysiciansList from './PhysiciansList.jsx';
 import PatientsList from './PatientsList.jsx';
 import sampleData from '../sampleData.js';
 
+import { Nav } from './Styles/AppStyles.jsx';
+
 
 function App() {
   const [physicians, setPhysicians] = useState([]);
@@ -13,10 +15,10 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <Nav>
       <PhysiciansList physicians={physicians}/>
       <PatientsList physicians={physicians}/>
-    </div>
+    </Nav>
   )
 }
 
