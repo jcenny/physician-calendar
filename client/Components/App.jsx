@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
+import PhysiciansList from './PhysiciansList.jsx';
+import PatientsList from './PatientsList.jsx';
+import sampleData from '../sampleData.js';
+
 
 function App() {
+  const [physicians, setPhysicians] = useState([]);
+
+  useEffect(() => {
+    setPhysicians(sampleData.physicians);
+  }, []);
+
   return (
-    <div>hello from app</div>
+    <div>
+      <PhysiciansList physicians={physicians}/>
+      <PatientsList physicians={physicians}/>
+    </div>
   )
 }
 
