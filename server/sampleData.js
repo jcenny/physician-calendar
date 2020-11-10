@@ -24,7 +24,7 @@ module.exports = {
       firstName: 'Algernop',
       lastName: 'Krieger',
       email: 'krieger@notable.com',
-      clicked: true,
+      clicked: false,
       patients: [
         {
           firstName: 'Sterling',

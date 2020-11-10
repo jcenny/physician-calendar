@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import Axios from 'axios';
 
 import PhysiciansList from './PhysiciansList.jsx';
 import PatientsList from './PatientsList.jsx';
-import sampleData from '../sampleData.js';
 
 import { Nav } from './Styles/AppStyles.jsx';
 
@@ -21,12 +21,18 @@ function App() {
       return physician
     })
     setPhysicians(newPhysicians);
+    // Axios.patch('/physicians', {email})
+    //   .then(() => getPhysicians())
+    //   .catch(err => console.log(`error updating clicked state of physician: ${err}`))
   }
 
+  const getPhysicians = () => {
+    Axios.get('/physicians')
+      .then(data => setPhysicians(data.data))
+      .catch(err => console.log(`error getting physicians: ${err}`))
+  }
 
-  useEffect(() => {
-    setPhysicians(sampleData.physicians);
-  }, []);
+  useEffect(getPhysicians, []);
 
   return (
     <Nav>
