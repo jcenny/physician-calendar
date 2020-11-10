@@ -1,11 +1,12 @@
 import React from 'react';
 
-function PhysiciansList({physicians}) {
+function PhysiciansList({ physicians, handleClick }) {
+
   return (
     <div>
       <h1>notable</h1>
       {physicians.map((physician) => (
-        <div>{`${physician.lastName}, ${physician.firstName}`}</div>
+        <div data-email={physician.email} onClick={handleClick}>{`${physician.lastName}, ${physician.firstName}`}</div>
       ))}
     </div>
   )

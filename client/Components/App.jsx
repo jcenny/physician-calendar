@@ -10,13 +10,27 @@ import { Nav } from './Styles/AppStyles.jsx';
 function App() {
   const [physicians, setPhysicians] = useState([]);
 
+  const handleClick = (e) => {
+    const { email } = e.target.dataset;
+    const newPhysicians = physicians.map((physician) => {
+      if (physician.email === email) {
+        physician.clicked = true; 
+      } else {
+        physician.clicked = false;
+      }
+      return physician
+    })
+    setPhysicians(newPhysicians);
+  }
+
+
   useEffect(() => {
     setPhysicians(sampleData.physicians);
   }, []);
 
   return (
     <Nav>
-      <PhysiciansList physicians={physicians}/>
+      <PhysiciansList physicians={physicians} handleClick={handleClick}/>
       <PatientsList physicians={physicians}/>
     </Nav>
   )
