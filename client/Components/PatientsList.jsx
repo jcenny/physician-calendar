@@ -3,7 +3,7 @@ import PatientEntry from './PatientEntry.jsx';
 
 import { Th } from './Styles/PatientsStyles.jsx';
 
-function PatientsList({ patients }) {
+function PatientsList({ patients, physician, patchPatient, deletePatient }) {
   return (
     <table>
       <tbody>
@@ -12,8 +12,17 @@ function PatientsList({ patients }) {
           <Th>Name</Th>
           <Th>Time</Th>
           <Th>Kind</Th>
+          <Th>Edit/Delete Appointment (Hours 8:00 AM - 5:00 PM)</Th>
         </tr>
-        {patients.map((patient, index) => <PatientEntry patient={patient} index={index} />)}
+        {patients.map((patient, index) => 
+          <PatientEntry
+            physician={physician} 
+            patient={patient} 
+            index={index} 
+            patchPatient={patchPatient}
+            deletePatient={deletePatient}
+            />
+          )}
       </tbody>
     </table>
   )

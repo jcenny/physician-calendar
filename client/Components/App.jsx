@@ -31,11 +31,21 @@ function App() {
   }
 
   const getPatients = (physicianID) => {
-    Axios.get(`/patients/${physicianID}`,)
-      .then(data => {
-        setPatients(data.data)
-      })
+    Axios.get(`/patients/${physicianID}`)
+      .then(data => setPatients(data.data))
       .catch(err => console.log(`error getting patients: ${err}`))
+  }
+
+  const patchPatient = (prevtime, time, physicianID) => {
+    Axios.patch(`/patients/${physicianID}`, { prevtime, time })
+      .then(data => setPatients(data.data))
+      .catch(err => console.log(`error editing patient appt time: ${err}`))
+  }
+
+  const deletePatient = (appttime, physicianID) => {
+    Axios.delete(`/patients/${physicianID}`, { appttime })
+      .then(data => setPatients(data.data))
+      .catch(err => console.log(`error deleting patient appt time: ${err}`))
   }
 
   useEffect(() => {
@@ -45,7 +55,11 @@ function App() {
   return (
     <Nav>
       <LeftNav physicians={physicians} handleClick={handleClick}/>
-      <RightNav physicians={physicians} patients={patients}/>
+      <RightNav 
+        physicians={physicians} 
+        patients={patients} 
+        patchPatient={patchPatient} 
+        deletePatient={deletePatient}/>
     </Nav>
   )
 }
