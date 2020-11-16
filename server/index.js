@@ -13,6 +13,14 @@ app.use(bodyParser.json());
 
 app.get('/physicians', (req, res) => {
   res.send(sampleData.physicians);
+});
+
+app.get('/patients/:id', (req, res) => {
+  const physicianID = req.params.id;
+  const patients = sampleData.patients.filter((patient) => {
+    return patient.physician_id === Number(physicianID);
+  })
+  res.send(patients);
 })
 
 app.listen(port, () => console.log(`Listening from port: ${port}`))

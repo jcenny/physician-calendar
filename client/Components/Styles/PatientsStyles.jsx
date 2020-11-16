@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const NavRight = styled.div`
+const Right = styled.div`
   width: 70%;
 `
 
@@ -9,6 +9,6 @@ const Th = styled.td`
 `
 
 export {
-  NavRight,
+  Right,
   Th,
 }

@@ -1,29 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 
-import PhysiciansList from './PhysiciansList.jsx';
-import PatientsList from './PatientsList.jsx';
+import LeftNav from './LeftNav.jsx';
+import RightNav from './RightNav.jsx';
 
 import { Nav } from './Styles/AppStyles.jsx';
 
-
 function App() {
   const [physicians, setPhysicians] = useState([]);
+  const [patients, setPatients] = useState([]);
 
   const handleClick = (e) => {
     const { email } = e.target.dataset;
     const newPhysicians = physicians.map((physician) => {
       if (physician.email === email) {
         physician.clicked = true; 
+        getPatients(physician.id)
       } else {
         physician.clicked = false;
       }
       return physician
     })
     setPhysicians(newPhysicians);
-    // Axios.patch('/physicians', {email})
-    //   .then(() => getPhysicians())
-    //   .catch(err => console.log(`error updating clicked state of physician: ${err}`))
   }
 
   const getPhysicians = () => {
@@ -32,12 +30,22 @@ function App() {
       .catch(err => console.log(`error getting physicians: ${err}`))
   }
 
-  useEffect(getPhysicians, []);
+  const getPatients = (physicianID) => {
+    Axios.get(`/patients/${physicianID}`,)
+      .then(data => {
+        setPatients(data.data)
+      })
+      .catch(err => console.log(`error getting patients: ${err}`))
+  }
+
+  useEffect(() => {
+    getPhysicians();
+  }, []);
 
   return (
     <Nav>
-      <PhysiciansList physicians={physicians} handleClick={handleClick}/>
-      <PatientsList physicians={physicians}/>
+      <LeftNav physicians={physicians} handleClick={handleClick}/>
+      <RightNav physicians={physicians} patients={patients}/>
     </Nav>
   )
 }
