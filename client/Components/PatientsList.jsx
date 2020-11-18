@@ -3,7 +3,7 @@ import PatientEntry from './PatientEntry.jsx';
 
 import { Th } from './Styles/PatientsStyles.jsx';
 
-function PatientsList({ patients, physician, patchPatient, deletePatient }) {
+function PatientsList({ patients, physicianid, patchPatient, deletePatient }) {
   return (
     <table>
       <tbody>
@@ -16,7 +16,7 @@ function PatientsList({ patients, physician, patchPatient, deletePatient }) {
         </tr>
         {patients.map((patient, index) => 
           <PatientEntry
-            physician={physician} 
+            physicianid={physicianid} 
             patient={patient} 
             index={index} 
             patchPatient={patchPatient}

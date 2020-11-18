@@ -23,12 +23,12 @@ app.get('/physicians/:physicianid/patients', (req, res) => {
   res.send(patients);
 })
 
-app.patch('/patients/:id', (req, res) => {
-  const { prevtime, time } = req.body;
-  const physicianID = req.params.id;
+app.patch('/physician/:physicianid/patients/:patientid', (req, res) => {
+  const { physicianid, patientid } = req.params;
+  const { time } = req.body
   const patients = sampleData.patients.filter((patient) => {
-    if (patient.physician_id === Number(physicianID)) {
-      if (patient.time === prevtime) {
+    if (patient.physician_id === Number(physicianid)) {
+      if (patient.id === Number(patientid)) {
         patient.time = time;
       }
       return patient;

@@ -14,7 +14,7 @@ function App() {
   const handleClick = (physicianid) => {
     getPatients(physicianid);
     physicians.forEach((physician) => {
-      if (physician.id === physicianid) {
+      if (physician.id === Number(physicianid)) {
         setCurrentPhysician(physician);
       }
     });

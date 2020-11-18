@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function PatientEntry({ patient, index, physician, patchPatient, deletePatient }) {
+function PatientEntry({ patient, index, physicianid, patchPatient, deletePatient }) {
   const [time, setTime] = useState('');
 
   const handleChange = (e) => {
@@ -8,8 +8,9 @@ function PatientEntry({ patient, index, physician, patchPatient, deletePatient }
   }
 
   const handleEdit = (e) => {
-    const { prevtime } = e.target.dataset;
-    patchPatient(prevtime, time, physician);
+    const patientid = e.target.id;
+    setTime('');
+    patchPatient(physicianid, patientid, time);
   }
 
   const handleDelete = (e) => {
@@ -22,23 +23,21 @@ function PatientEntry({ patient, index, physician, patchPatient, deletePatient }
       <td>{index + 1}</td>
       <td>{`${patient.firstName} ${patient.lastName}`}</td>
       <td>
-        <input type='time' value={patient.time} readOnly/>
+        <input type='time' value={patient.time} readOnly />
       </td>
       <td>{patient.kind}</td>
       <td>
-        <form>
-          <input 
-            placeholder='Time' 
-            type='time'
-            name='time' 
-            min='08:00:00'
-            max='17:00:00' 
-            step='900' 
-            value={time} 
-            onChange={handleChange}
-            />
-          <button data-prevtime={patient.time} onClick={handleEdit}>Edit</button>
-        </form>
+        <input
+          placeholder='Time'
+          type='time'
+          name='time'
+          min='08:00:00'
+          max='17:00:00'
+          step='900'
+          value={time}
+          onChange={handleChange}
+        />
+        <button id={patient.id} onClick={handleEdit}>Edit</button>
         <button data-appttime={patient.time} onClick={handleDelete}>Delete</button>
       </td>
     </tr>
