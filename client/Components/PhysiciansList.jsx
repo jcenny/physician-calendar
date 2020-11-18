@@ -9,11 +9,8 @@ function PhysiciansList({ physicians, handleClick }) {
   return (
     <div>
       {physicians.map((physician) => (
-        <div 
-          id={physician.id}
-          key={physician.email} 
-          onClick={handleClick}>
-            {`${physician.lastName}, ${physician.firstName}`}
+        <div id={physician.id} key={physician.email} onClick={handlePhysicianClick}>
+          {`${physician.lastName}, ${physician.firstName}`}
         </div>
       ))}
     </div>
