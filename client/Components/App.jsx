@@ -26,14 +26,14 @@ function App() {
       .catch(err => console.log(`error getting physicians: ${err}`))
   }
 
-  const getPatients = (physicianID) => {
-    Axios.get(`/patients/${physicianID}`)
+  const getPatients = (physicianid) => {
+    Axios.get(`/physicians/${physicianid}/patients`)
       .then(data => setPatients(data.data))
       .catch(err => console.log(`error getting patients: ${err}`))
   }
 
-  const patchPatient = (prevtime, time, physicianID) => {
-    Axios.patch(`/patients/${physicianID}`, { prevtime, time })
+  const patchPatient = (physicianid, patientid, time) => {
+    Axios.patch(`/physician/${physicianid}/patients/${patientid}`, { time })
       .then(data => setPatients(data.data))
       .catch(err => console.log(`error editing patient appt time: ${err}`))
   }

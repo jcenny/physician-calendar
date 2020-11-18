@@ -15,11 +15,11 @@ app.get('/physicians', (req, res) => {
   res.send(sampleData.physicians);
 });
 
-app.get('/patients/:id', (req, res) => {
-  const physicianID = req.params.id;
+app.get('/physicians/:physicianid/patients', (req, res) => {
+  const { physicianid } = req.params;
   const patients = sampleData.patients.filter((patient) => {
-    return patient.physician_id === Number(physicianID);
-  })
+    return patient.physician_id === Number(physicianid);
+  });
   res.send(patients);
 })
 
