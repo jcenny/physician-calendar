@@ -5,21 +5,18 @@ module.exports = {
       firstName: 'Julia',
       lastName: 'Hibbert',
       email: 'hibbert@notable.com',
-      clicked: false,
     },
     { 
       id: 2,
       firstName: 'Algernop',
       lastName: 'Krieger',
       email: 'krieger@notable.com',
-      clicked: false,
     },
     {
       id: 3,
       firstName: 'Nick',
       lastName: 'Riviera',
       email: 'Riviera@notable.com',
-      clicked: false,
     }
   ],
   patients: [

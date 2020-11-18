@@ -9,19 +9,15 @@ import { Nav } from './Styles/AppStyles.jsx';
 function App() {
   const [physicians, setPhysicians] = useState([]);
   const [patients, setPatients] = useState([]);
+  const [currentPhysician, setCurrentPhysician] = useState({});
 
-  const handleClick = (e) => {
-    const { email } = e.target.dataset;
-    const newPhysicians = physicians.map((physician) => {
-      if (physician.email === email) {
-        physician.clicked = true; 
-        getPatients(physician.id)
-      } else {
-        physician.clicked = false;
+  const handleClick = (physicianid) => {
+    getPatients(physicianid);
+    physicians.forEach((physician) => {
+      if (physician.id === physicianid) {
+        setCurrentPhysician(physician);
       }
-      return physician
-    })
-    setPhysicians(newPhysicians);
+    });
   }
 
   const getPhysicians = () => {
@@ -43,9 +39,9 @@ function App() {
   }
 
   const deletePatient = (appttime, physicianID) => {
-    Axios.delete(`/patients/${physicianID}`, { appttime })
-      .then(data => setPatients(data.data))
-      .catch(err => console.log(`error deleting patient appt time: ${err}`))
+    // Axios.delete(`/patients/${physicianID}`, { appttime })
+    //   .then(data => setPatients(data.data))
+    //   .catch(err => console.log(`error deleting patient appt time: ${err}`))
   }
 
   useEffect(() => {
@@ -56,7 +52,7 @@ function App() {
     <Nav>
       <LeftNav physicians={physicians} handleClick={handleClick}/>
       <RightNav 
-        physicians={physicians} 
+        physician={currentPhysician} 
         patients={patients} 
         patchPatient={patchPatient} 
         deletePatient={deletePatient}/>
