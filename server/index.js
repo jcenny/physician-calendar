@@ -41,17 +41,13 @@ app.patch('/physicians/:physicianid/patients/:patientid', (req, res) => {
 
 app.delete('/physicians/:physicianid/patients/:patientid', (req, res) => {
   const { physicianid, patientid } = req.params;
+  const updatedAllPatients = sampleData.patients.filter((patient) => {
+    if (patient.id !== Number(patientid)) return patient;
+  });
+  sampleData.patients = updatedAllPatients;
+
   const patients = sampleData.patients.filter((patient) => {
-    if (patient.physician_id === Number(physicianid) && patient.id !== Number(patientid)) {
-      return patient;
-    }
-  })
-  const updatedPatients = sampleData.patients.filter((patient) => {
-    if (patient.physician_id === Number(physicianid) && patient.id !== Number(patientid)) {
-      if (patient.id !== Number(patientid)) {
-        return patient;
-      }
-    }
+    if (patient.physician_id === Number(physicianid)) return patient;
   })
   res.send(patients);
 })
