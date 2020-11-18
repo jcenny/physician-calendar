@@ -14,8 +14,8 @@ function PatientEntry({ patient, index, physicianid, patchPatient, deletePatient
   }
 
   const handleDelete = (e) => {
-    const { appttime } = e.target.dataset;
-    deletePatient(appttime, physician);
+    const patientid = e.target.id;
+    deletePatient(physicianid, patientid);
   }
 
   return (
@@ -38,7 +38,7 @@ function PatientEntry({ patient, index, physicianid, patchPatient, deletePatient
           onChange={handleChange}
         />
         <button id={patient.id} onClick={handleEdit}>Edit</button>
-        <button data-appttime={patient.time} onClick={handleDelete}>Delete</button>
+        <button id={patient.id} onClick={handleDelete}>Delete</button>
       </td>
     </tr>
   )

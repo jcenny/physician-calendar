@@ -23,34 +23,37 @@ app.get('/physicians/:physicianid/patients', (req, res) => {
   res.send(patients);
 })
 
-app.patch('/physician/:physicianid/patients/:patientid', (req, res) => {
+app.patch('/physicians/:physicianid/patients/:patientid', (req, res) => {
   const { physicianid, patientid } = req.params;
   const { time } = req.body
-  const patients = sampleData.patients.filter((patient) => {
-    if (patient.physician_id === Number(physicianid)) {
-      if (patient.id === Number(patientid)) {
-        patient.time = time;
-      }
-      return patient;
-    }
+
+  const updatedAllPatients = sampleData.patients.filter((patient) => {
+    if (patient.id === Number(patientid)) patient.time = time
+    return patient;
   })
+  sampleData.patients = updatedAllPatients;
+
+  const patients = sampleData.patients.filter((patient) => {
+    if (patient.physician_id === Number(physicianid)) return patient;
+  });
   res.send(patients);
 })
 
-app.delete('/patients/:id', (req, res) => {
-  console.log(req.body)
-  const { appttime } = req.body;
-  const physicianID = req.params.id;
+app.delete('/physicians/:physicianid/patients/:patientid', (req, res) => {
+  const { physicianid, patientid } = req.params;
   const patients = sampleData.patients.filter((patient) => {
-    if (patient.physician_id === Number(physicianID)) {
-      console.log(patient.time, appttime)
-      if (patient.time !== appttime) {
+    if (patient.physician_id === Number(physicianid) && patient.id !== Number(patientid)) {
+      return patient;
+    }
+  })
+  const updatedPatients = sampleData.patients.filter((patient) => {
+    if (patient.physician_id === Number(physicianid) && patient.id !== Number(patientid)) {
+      if (patient.id !== Number(patientid)) {
         return patient;
       }
     }
   })
-  console.log(patients)
   res.send(patients);
-}) 
+})
 
 app.listen(port, () => console.log(`Listening from port: ${port}`))

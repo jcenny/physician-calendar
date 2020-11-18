@@ -33,15 +33,15 @@ function App() {
   }
 
   const patchPatient = (physicianid, patientid, time) => {
-    Axios.patch(`/physician/${physicianid}/patients/${patientid}`, { time })
+    Axios.patch(`/physicians/${physicianid}/patients/${patientid}`, { time })
       .then(data => setPatients(data.data))
       .catch(err => console.log(`error editing patient appt time: ${err}`))
   }
 
-  const deletePatient = (appttime, physicianID) => {
-    // Axios.delete(`/patients/${physicianID}`, { appttime })
-    //   .then(data => setPatients(data.data))
-    //   .catch(err => console.log(`error deleting patient appt time: ${err}`))
+  const deletePatient = (physicianid, patientid) => {
+    Axios.delete(`/physicians/${physicianid}/patients/${patientid}`)
+      .then(data => setPatients(data.data))
+      .catch(err => console.log(`error deleting patient appt time: ${err}`))
   }
 
   useEffect(() => {
